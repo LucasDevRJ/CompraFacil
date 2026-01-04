@@ -1,6 +1,6 @@
 package com.github.lucasdevrj.modelos;
 
-public class Produto {
+public class Compra {
 
     private String descricao;
     private double preco;
