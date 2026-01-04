@@ -4,6 +4,7 @@ import com.github.lucasdevrj.modelos.CartaoDeCredito;
 import com.github.lucasdevrj.modelos.Compra;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class MenuPrincipal {
@@ -49,7 +50,9 @@ public class MenuPrincipal {
     private void exibeComprasRealizadas(CartaoDeCredito cartaoDeCredito) {
         System.out.println("**********************************");
         System.out.println("COMPRAS REALIZADAS: ");
-        for (Compra compra : cartaoDeCredito.getExtrato()) {
+        ArrayList<Compra> listaDeCompras = cartaoDeCredito.getExtrato();
+        listaDeCompras.sort(Comparator.comparing(Compra::getPreco));
+        for (Compra compra : listaDeCompras) {
             String produto = compra.getDescricao();
             double preco = compra.getPreco();
             System.out.printf("%s - R$%.2f", produto, preco);
