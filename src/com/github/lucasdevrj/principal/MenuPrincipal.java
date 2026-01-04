@@ -13,13 +13,14 @@ public class MenuPrincipal {
 
         System.out.print("Digite o limite do cartão: ");
         double limite = entrada.nextDouble();
+        entrada.nextLine();
 
         ArrayList<Compra> listaDeCompras = new ArrayList<>();
 
         int resposta = 1;
         do {
 
-            System.out.println("Digite a descrição da compra: ");
+            System.out.print("Digite a descrição da compra: ");
             String descricao = entrada.nextLine();
 
             System.out.print("Digite o valor da compra: ");
@@ -36,6 +37,7 @@ public class MenuPrincipal {
 
             System.out.print("Digite 0 para sair ou 1 para continuar: ");
             resposta = entrada.nextInt();
+            entrada.nextLine();
         } while(resposta == 1);
 
         CartaoDeCredito cartaoDeCredito = new CartaoDeCredito(limite, listaDeCompras);
@@ -44,21 +46,16 @@ public class MenuPrincipal {
         entrada.close();
     }
 
-    public void exibeComprasRealizadas(CartaoDeCredito cartaoDeCredito) {
+    private void exibeComprasRealizadas(CartaoDeCredito cartaoDeCredito) {
+        System.out.println("**********************************");
+        System.out.println("COMPRAS REALIZADAS: ");
         for (Compra compra : cartaoDeCredito.getExtrato()) {
             String produto = compra.getDescricao();
             double preco = compra.getPreco();
-            double limite = cartaoDeCredito.getLimite();
-            String extrato = """
-                **********************************
-                COMPRAS REALIZADAS:
-                %s - R$%2.f
-                
-                **********************************
-                
-                Saldo do cartão: R$%2.f
-                """.formatted(produto, preco, limite);
-            System.out.println(extrato);
+            System.out.printf("%s - R$%.2f", produto, preco);
+            System.out.println();
         }
+        System.out.println("**********************************");
+        System.out.printf("Saldo do cartão: R$%.2f", cartaoDeCredito.getLimite());
     }
 }
