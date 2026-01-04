@@ -10,4 +10,8 @@ public class CartaoDeCredito {
     public CartaoDeCredito(double limite) {
         this.limite = limite;
     }
+
+    public double getLimite() {
+        return limite;
+    }
 }
