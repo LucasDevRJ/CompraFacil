@@ -22,4 +22,9 @@ public class Compra implements Comparable<Compra> {
     public int compareTo(Compra outraCompra) {
         return Double.compare(preco, outraCompra.preco);
     }
+
+    @Override
+    public String toString() {
+        return "%s - R$%.2f".formatted(descricao, preco);
+    }
 }

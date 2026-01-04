@@ -53,10 +53,7 @@ public class MenuPrincipal {
         ArrayList<Compra> listaDeCompras = cartaoDeCredito.getExtrato();
         listaDeCompras.sort(Comparator.comparing(Compra::getPreco));
         for (Compra compra : listaDeCompras) {
-            String produto = compra.getDescricao();
-            double preco = compra.getPreco();
-            System.out.printf("%s - R$%.2f", produto, preco);
-            System.out.println();
+            System.out.println(compra);
         }
         System.out.println("**********************************");
         System.out.printf("Saldo do cartão: R$%.2f", cartaoDeCredito.getLimite());
