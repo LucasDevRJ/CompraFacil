@@ -10,10 +10,6 @@ public class Compra implements Comparable<Compra> {
         this.preco = preco;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
     public double getPreco() {
         return preco;
     }
