@@ -14,7 +14,6 @@ public class MenuPrincipal {
         System.out.print("Digite o limite do cartão: ");
         double limite = entrada.nextDouble();
 
-        CartaoDeCredito cartaoDeCredito = new CartaoDeCredito(limite);
         ArrayList<Compra> listaDeCompras = new ArrayList<>();
 
         int resposta = 1;
@@ -26,25 +25,31 @@ public class MenuPrincipal {
             System.out.print("Digite o valor da compra: ");
             double preco = entrada.nextDouble();
 
-            if (preco > cartaoDeCredito.getLimite()) {
+            if (preco > limite) {
                 System.out.println("Saldo insuficiente!");
                 break;
             }
 
             Compra compra = new Compra(descricao, preco);
             listaDeCompras.add(compra);
+            limite -= preco;
 
             System.out.print("Digite 0 para sair ou 1 para continuar: ");
             resposta = entrada.nextInt();
         } while(resposta == 1);
 
-        exibeComprasRealizadas(listaDeCompras);
+        CartaoDeCredito cartaoDeCredito = new CartaoDeCredito(limite, listaDeCompras);
+        exibeComprasRealizadas(cartaoDeCredito);
 
         entrada.close();
     }
 
-    public void exibeComprasRealizadas(ArrayList<Compra> listaDeCompras) {
-        String extrato = """
+    public void exibeComprasRealizadas(CartaoDeCredito cartaoDeCredito) {
+        for (Compra compra : cartaoDeCredito.getExtrato()) {
+            String produto = compra.getDescricao();
+            double preco = compra.getPreco();
+            double limite = cartaoDeCredito.getLimite();
+            String extrato = """
                 **********************************
                 COMPRAS REALIZADAS:
                 %s - R$%2.f
@@ -52,7 +57,8 @@ public class MenuPrincipal {
                 **********************************
                 
                 Saldo do cartão: R$%2.f
-                """.formatted(listaDeCompras);
-        System.out.println(extrato);
+                """.formatted(produto, preco, limite);
+            System.out.println(extrato);
+        }
     }
 }

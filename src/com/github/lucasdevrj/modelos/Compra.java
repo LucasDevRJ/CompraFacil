@@ -9,4 +9,12 @@ public class Compra {
         this.descricao = descricao;
         this.preco = preco;
     }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
 }
